@@ -1,0 +1,9 @@
+<h2>{{ device.name }}</h2>
+<!-- Display other device details -->
+
+<!-- Add the lead capture form -->
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Submit</button>
+</form>

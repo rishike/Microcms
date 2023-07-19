@@ -1,0 +1,11 @@
+{% for section in sections %}
+  <div class="section-item">
+    <!-- Display section information -->
+    <h3>{{ section.title }}</h3>
+    <img src="{{ section.image.url }}" alt="{{ section.title }}">
+    <div>{{ section.html_content|safe }}</div>
+    <!-- Add more section fields as needed -->
+  </div>
+{% empty %}
+  <p>No sections available.</p>
+{% endfor %}

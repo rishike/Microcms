@@ -1,0 +1,18 @@
+<!-- visitor_email.html -->
+<p>Dear {{ walk_in.name }},</p>
+<p>Thank you for your walk-in. We have received your details and will process your request shortly.</p>
+<p>Regards,</p>
+<p>Your Company</p>
+
+<!-- vendor_email.html -->
+<p>Hello {{ walk_in.vendor.name }},</p>
+<p>A new walk-in has been registered. Please review the details below:</p>
+<ul>
+  <li>Name: {{ walk_in.name }}</li>
+  <li>Email: {{ walk_in.email }}</li>
+  <li>Phone: {{ walk_in.phone_number }}</li>
+  <li>Device: {{ walk_in.device.name }}</li>
+  <!-- Add more walk-in details as needed -->
+</ul>
+<p>Regards,</p>
+<p>Your Company</p>
