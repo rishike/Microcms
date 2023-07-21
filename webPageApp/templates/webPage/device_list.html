@@ -24,16 +24,7 @@
 
 <hr />
 <div class="container">
-
-  <h1 class="display-4">Lead Form </h1>
-  <div class="row g-3 align-items-center">
-
-  <form method="post">
-    {% csrf_token %}
-    {{ form }}
-    <button class="btn btn-primary text-center" type="submit">Submit</button>
-  </form>
-</div>
+  {% include "webPage\lead_capture.html" %}
 </div>
   
   <!-- pagination  -->

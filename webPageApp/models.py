@@ -18,9 +18,9 @@ class WebPage(models.Model):
 
 class PageSection(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='section')
+    image = models.ImageField(upload_to='section', blank=True)
     html_content = models.TextField()
-    order = models.PositiveIntegerField()
+    order = models.PositiveIntegerField(default=0, help_text="Enter the order of the section (lower value appears first).")
     page = models.ForeignKey(WebPage, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
 

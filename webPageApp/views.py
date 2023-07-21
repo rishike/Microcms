@@ -12,7 +12,14 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
+from webPageApp.models import PageSection
+
 # Create your views here.
+
+def display_sections(request):
+    sections = PageSection.objects.filter(active=True).order_by('order')
+    return render(request, 'webPage\section.html', {'sections': sections})
+
 
 def device_list(request):
     devices = Device.objects.all()
@@ -36,11 +43,11 @@ def lead_capture(request):
             paginator = Paginator(devices, 12)  # Display 12 devices per page
             page_number = request.GET.get('page')
             page_obj = paginator.get_page(page_number)
-            return render(request, 'device_list.html', {'page_obj': page_obj})
+            return render(request, 'webPage\device_list.html', {'page_obj': page_obj})
     else:
         form = LeadCaptureForm()
 
-    return render(request, 'lead_capture.html', {'form': form})
+    return render(request, 'webPage\lead_capture.html', {'form': form})
 
 
 def device_detail(request, device_id):
@@ -56,13 +63,13 @@ def device_detail(request, device_id):
     else:
         form = LeadCaptureForm()
 
-    return render(request, 'device_detail.html', {'device': device, 'form': form})
+    return render(request, 'webPage\device_detail.html', {'device': device, 'form': form})
 
 def send_visitor_email(walk_in):
     subject = 'Walk-in Confirmation'
     html_message = render_to_string('email/visitor_email.html', {'walk_in': walk_in})
     plain_message = strip_tags(html_message)
-    from_email = 'your-email@example.com'
+    from_email = 'rishi@yopmail.com'
     to_email = walk_in.email
 
     send_mail(subject, plain_message, from_email, [to_email], html_message=html_message)
