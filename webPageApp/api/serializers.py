@@ -10,19 +10,20 @@ class DeviceSerializer(serializers.ModelSerializer):
 
 
 class WalkInSerializer(serializers.ModelSerializer):
-    token = serializers.SerializerMethodField()
+    # token_number = serializers.SerializerMethodField()
 
     class Meta:
         model = WalkIn
-        fields = ('name', 'phone_number', 'email', 'address', 'city', 'country', 'referral_code', 'token')
+        fields = ('lead', 'vendor', 'device', 'currency', 'offer_price', 'walkin_datetime', 'token_number')
+        read_only_fields = ('token_number',)
 
-    def get_token(self, obj):
-        # Generate and return the token based on your desired logic
-        # Example: Generate a unique token based on the walk-in details
-        token = "SOME_TOKEN_GENERATION_LOGIC"
-        return token
+    # def get_token_number(self, obj):
+
+    #     token = WalkIn.objects.all().last().token_number
+    #     token = token+1
+    #     return token
 
     def create(self, validated_data):
-        token = self.get_token(validated_data)
-        walk_in = WalkIn.objects.create(token=token, **validated_data)
+        token = WalkIn.objects.all().last().token_number + 1
+        walk_in = WalkIn.objects.create(token_number=token, **validated_data)
         return walk_in
